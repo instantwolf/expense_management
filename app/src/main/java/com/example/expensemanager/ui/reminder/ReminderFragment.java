@@ -11,20 +11,21 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.expensemanager.databinding.FragmentDashboardBinding;
+import com.example.expensemanager.databinding.FragmentReminderBinding;
 
 public class ReminderFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentReminderBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         ReminderViewModel dashboardViewModel =
                 new ViewModelProvider(this).get(ReminderViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentReminderBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
+        final TextView textView = binding.textReminder;
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
