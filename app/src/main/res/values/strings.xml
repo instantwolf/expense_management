@@ -26,4 +26,5 @@
         <item>24 hours</item>
         <item>48 hours</item>
     </string-array>
+    <string name="expenses">Expenses</string>
 </resources>

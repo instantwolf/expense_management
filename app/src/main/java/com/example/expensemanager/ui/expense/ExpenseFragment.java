@@ -1,4 +1,4 @@
-package com.example.expensemanager.ui.settings;
+package com.example.expensemanager.ui.expense;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.expensemanager.databinding.FragmentSettingsBinding;
+import com.example.expensemanager.databinding.FragmentExpenseBinding;
 
-public class SettingsFragment extends Fragment {
+public class ExpenseFragment extends Fragment {
 
-    private FragmentSettingsBinding binding;
+    private FragmentExpenseBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SettingsViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(SettingsViewModel.class);
+        ExpenseViewModel expenseViewModel =
+                new ViewModelProvider(this).get(ExpenseViewModel.class);
 
-        binding = FragmentSettingsBinding.inflate(inflater, container, false);
+        binding = FragmentExpenseBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSettings;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textExpense;
+        expenseViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
