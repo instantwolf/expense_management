@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.expensemanager.databinding.FragmentDashboardBinding;
 import com.example.expensemanager.databinding.FragmentReminderBinding;
 
 public class ReminderFragment extends Fragment {
@@ -25,8 +24,8 @@ public class ReminderFragment extends Fragment {
         binding = FragmentReminderBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textReminder;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        //final TextView textView = binding.textReminder;
+        //dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

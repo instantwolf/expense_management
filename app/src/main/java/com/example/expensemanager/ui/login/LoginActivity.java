@@ -81,15 +81,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
                 }
-                setResult(Activity.RESULT_OK);
-
-
-                // Get a Context object from the current activity
-                Intent mainActivityIntent = new Intent(context, MainActivity.class);
-                startActivity(mainActivityIntent);
-
-                //Complete and destroy login activity once successful
-               // finish();
             }
         });
 
