@@ -95,12 +95,4 @@
         app:layout_constraintTop_toBottomOf="@+id/SearchView"
         tools:src="@mipmap/delete_icon_foreground" />
 
-    <SearchView
-        android:id="@+id/SearchView1"
-        android:layout_width="190dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="317dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
