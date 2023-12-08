@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <SearchView
-        android:id="@+id/history_search"
+        android:id="@+id/SearchView"
         android:layout_width="190dp"
         android:layout_height="30dp"
         android:layout_marginStart="40dp"
@@ -49,7 +49,7 @@
         android:text="Expense-Title"
         android:textColor="#000000"
         app:layout_constraintStart_toEndOf="@+id/history_coloured_dot"
-        app:layout_constraintTop_toBottomOf="@+id/history_search" />
+        app:layout_constraintTop_toBottomOf="@+id/SearchView" />
 
     <TextView
         android:id="@+id/history_date_time"
@@ -70,7 +70,7 @@
         android:layout_marginTop="35dp"
         android:src="@drawable/coloured_dot_1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/history_search" />
+        app:layout_constraintTop_toBottomOf="@+id/SearchView" />
 
     <TextView
         android:id="@+id/history_expense_amount"
@@ -81,7 +81,7 @@
         android:text="XX.XX€"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/history_search" />
+        app:layout_constraintTop_toBottomOf="@+id/SearchView" />
 
     <ImageView
         android:id="@+id/history_expense_delete"
@@ -92,7 +92,15 @@
         android:scaleX="1.8"
         android:scaleY="1.8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/history_search"
+        app:layout_constraintTop_toBottomOf="@+id/SearchView"
         tools:src="@mipmap/delete_icon_foreground" />
+
+    <SearchView
+        android:id="@+id/SearchView1"
+        android:layout_width="190dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="317dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
