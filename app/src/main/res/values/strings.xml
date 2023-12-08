@@ -15,5 +15,16 @@
     <string name="history">History</string>
     <string name="reminder">Reminder</string>
     <string name="settings">Settings</string>
+    <string-array name="category">
+        <item>Hobby</item>
+        <item>Work</item>
+        <item>other</item>
+    </string-array>
+    <string-array name="time_interval">
+        <item>1 hour</item>
+        <item>10 hours</item>
+        <item>24 hours</item>
+        <item>48 hours</item>
+    </string-array>
     <string name="expenses">Expenses</string>
 </resources>
