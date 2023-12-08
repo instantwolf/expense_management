@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FFFFFF"/> <!-- Hintergrundfarbe, hier weiß -->
+    <stroke android:width="2dp" android:color="#000000"/> <!-- Rahmenfarbe und -breite, hier rot und 2dp -->
+    <corners android:radius="4dp"/> <!-- Optional: Eckenradius -->
+</shape>
