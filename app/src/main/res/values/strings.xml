@@ -23,7 +23,7 @@
     <string name="ChangePasswordTitel">Change Password</string>
     <string name="NewPassword">New Password</string>
     <string name="RepeatNewPassword">Repeat New Password</string>
-    <string-array name="category">
+    <string-array name="expense_category">
         <item>Hobby</item>
         <item>Work</item>
         <item>other</item>
