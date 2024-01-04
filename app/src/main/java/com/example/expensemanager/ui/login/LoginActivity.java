@@ -1,7 +1,5 @@
 package com.example.expensemanager.ui.login;
 
-import android.app.Activity;
-
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -20,20 +18,22 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.expensemanager.MainActivity;
 import com.example.expensemanager.R;
-import com.example.expensemanager.ui.login.LoginViewModel;
-import com.example.expensemanager.ui.login.LoginViewModelFactory;
 import com.example.expensemanager.databinding.ActivityLoginBinding;
+import com.example.expensemanager.ui.home.HomeFragment;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
+
+    private EditText editTextEmail;
+    private EditText edittextPassword;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,8 +45,10 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
-        final EditText usernameEditText = binding.username;
-        final EditText passwordEditText = binding.password;
+        //final EditText usernameEditText = binding.username;
+        //final EditText passwordEditText = binding.password;
+        /*
+
         final Button loginButton = binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
 
@@ -115,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        /*
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,6 +126,57 @@ public class LoginActivity extends AppCompatActivity {
                         passwordEditText.getText().toString());
             }
         });
+
+         */
+
+        // Hier beginnts
+
+
+        // Bei SignUPText klick gehe zu SignUp Activity.
+
+        Button button = findViewById(R.id.buttonSignIn);
+
+        button.setOnClickListener(v -> {
+                    Intent intent1 = new Intent(LoginActivity.this, SignUpActivity.class);
+                    startActivity(intent1);
+                }
+        );
+
+
+        // Bei enter gehe zu Home + überprüfe user+ ein testuser
+        ImageButton imageButton = findViewById(R.id.imageButton);
+        editTextEmail = findViewById(R.id.username);
+        edittextPassword = findViewById(R.id.password);
+
+        imageButton.setOnClickListener(v -> {
+            String enteredEmail = editTextEmail.getText().toString();
+            String enteredPassword = edittextPassword.getText().toString();
+
+            // Example: Check if the entered email and password are correct
+            if (isValidAccount(enteredEmail, enteredPassword)) {
+                // If the account is valid, start the MainActivity5
+                Intent intent = new Intent(LoginActivity.this, HomeFragment.class);
+                startActivity(intent);
+            } else {
+                // If the account is not valid, you may show an error message
+                // or perform any other desired action.
+                Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        TextView textView = findViewById(R.id.textViewForgotPassword);
+
+        textView.setOnClickListener(v -> {
+                    Intent intent = new Intent(LoginActivity.this, LogInForgotPassword.class);
+                    startActivity(intent);
+                }
+
+
+        );
+
+
+
+
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
@@ -134,4 +188,20 @@ public class LoginActivity extends AppCompatActivity {
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
+    private boolean isValidAccount(String enteredEmail, String enteredPassword) {
+        // Beispiel: Hardcoded-Email und Passwort für Tests
+        String correctEmail = "test@example.com";
+        String correctPassword = "123";
+
+        // Überprüfen, ob die eingegebenen Daten mit den gespeicherten Daten übereinstimmen
+        if (SignUpActivity.checkCredentials(this, enteredEmail, enteredPassword)) {
+            // Die eingegebenen Daten stimmen mit den gespeicherten Daten überein
+            return true;
+        } else {
+            // Die eingegebenen Daten stimmen nicht mit den gespeicherten Daten überein
+            // Überprüfen Sie die eingegebenen Daten mit den festgelegten Werten für diese LoginActivity
+            return enteredEmail.equals(correctEmail) && enteredPassword.equals(correctPassword);
+        }
+    }
+
 }

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">ExpenseManager</string>
+    <string name="title_signUp">Sign Up</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -18,6 +19,10 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="Keep_me_logged_in">Keep me logged in</string>
     <string name="Login">Login:</string>
+    <string name="ForgotPasswordMessage">We will send you a link to change your Password</string>
+    <string name="ChangePasswordTitel">Change Password</string>
+    <string name="NewPassword">New Password</string>
+    <string name="RepeatNewPassword">Repeat New Password</string>
     <string-array name="category">
         <item>Hobby</item>
         <item>Work</item>
