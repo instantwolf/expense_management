@@ -9,10 +9,11 @@
     <EditText
         android:id="@+id/settings.monthly.amount"
         android:layout_width="140dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="72dp"
         android:ems="10"
+        android:hint="0000.00€"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -32,10 +33,11 @@
     <EditText
         android:id="@+id/settings.yearly.amount"
         android:layout_width="140dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="50dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="72dp"
         android:ems="10"
+        android:hint="0000.00€"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pr.new.text" />
@@ -43,10 +45,11 @@
     <EditText
         android:id="@+id/editTextNumberDecimal"
         android:layout_width="120dp"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="76dp"
         android:ems="10"
+        android:hint="000.00€"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings.add.text" />
@@ -55,22 +58,23 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="45dp"
+        android:layout_marginTop="25dp"
         android:text="Log Out"
         android:textColor="#0044CC"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.478"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <EditText
         android:id="@+id/editTextNumberDecimal2"
         android:layout_width="120dp"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_marginTop="38dp"
         android:layout_marginEnd="76dp"
         android:ems="10"
+        android:hint="000.00€"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings.category1.text" />
@@ -114,7 +118,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:text="Default Currency:"
         android:textColor="#000000"
         android:textSize="18sp"
@@ -125,8 +129,9 @@
         android:id="@+id/spinner"
         android:layout_width="140dp"
         android:layout_height="30dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="72dp"
+        android:entries="@array/currency_options"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings.yearly.text" />
 
@@ -135,7 +140,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:text="Change Password"
         android:textColor="#0044CC"
         android:textSize="18sp"
@@ -157,7 +162,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:text="Add Monthly Budget for a Category:"
         android:textColor="#000000"
         android:textSize="18sp"
@@ -189,10 +194,11 @@
     <EditText
         android:id="@+id/editTextNumberDecimal3"
         android:layout_width="120dp"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_marginTop="38dp"
         android:layout_marginEnd="76dp"
         android:ems="10"
+        android:hint="000.00€"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings.category2.text" />
@@ -202,7 +208,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:text="Yearly Budget:"
         android:textColor="#000000"
         android:textSize="18sp"

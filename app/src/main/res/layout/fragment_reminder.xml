@@ -65,13 +65,15 @@
     <EditText
         android:id="@+id/editTextDate"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="65dp"
         android:ems="10"
+        android:hint="Enter date"
         android:inputType="date"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+
 
     <ImageView
         android:id="@+id/imageView"
@@ -83,7 +85,7 @@
         android:scaleY="1.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextText"
-        tools:src="@mipmap/calendar_icon_foreground" />
+        android:src="@mipmap/calendar_icon_foreground" />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -95,7 +97,7 @@
         android:scaleY="1.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        tools:src="@mipmap/repeat_icon_foreground" />
+        android:src="@mipmap/repeat_icon_foreground" />
 
     <Spinner
         android:id="@+id/spinner2"
@@ -104,7 +106,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="44dp"
         app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDate"
+        android:entries="@array/repeat_options" />
 
     <Button
         android:id="@+id/button3"

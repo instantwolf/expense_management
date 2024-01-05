@@ -35,4 +35,18 @@
         <item>48 hours</item>
     </string-array>
     <string name="expenses">Expenses</string>
+    <string-array name="sort_options">
+        <item>Date</item>
+        <item>Amount</item>
+    </string-array>
+    <string-array name="repeat_options">
+        <item>Dont repeat</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
+    </string-array>
+    <string-array name="currency_options">
+        <item>€ EUR</item>
+        <item>$ USD</item>
+        <item>₽ RUB</item>
+    </string-array>
 </resources>
