@@ -82,17 +82,76 @@ public class HomeFragment extends Fragment {
     }
 
     private void updateCategoryViews(String category) {
-        if (category.equals("All")) {
-            binding.cat1.setText("Food");
-            binding.cat2.setText("Hobby");
-            binding.cat3.setText("Other");
-            binding.cat2.setVisibility(View.VISIBLE);
-            binding.cat3.setVisibility(View.VISIBLE);
-        } else {
-            binding.cat1.setText(category);
-            binding.cat2.setVisibility(View.GONE);
-            binding.cat3.setVisibility(View.GONE);
+        switch (category) {
+            case "All":
+                // Show all categories
+                binding.groupCategory1.setVisibility(View.VISIBLE);
+                binding.groupCategory2.setVisibility(View.VISIBLE);
+                binding.groupCategory3.setVisibility(View.VISIBLE);
+
+                // Set texts for views
+                binding.cat1.setText("Food");
+                binding.money1.setText("261.52€");
+                binding.percent1.setText("61.15%");
+
+                binding.cat2.setText("Hobby");
+                binding.money2.setText("123.45€");
+                binding.percent2.setText("28.87%");
+
+                binding.cat3.setText("Other");
+                binding.money3.setText("42.96€");
+                binding.percent3.setText("9.98%");
+                break;
+
+            case "Food":
+                // Show only Food category
+                binding.groupCategory1.setVisibility(View.VISIBLE);
+                binding.groupCategory2.setVisibility(View.GONE);
+                binding.groupCategory3.setVisibility(View.GONE);
+                binding.cat1.setText("Food");
+                binding.money1.setText("261,52€");
+                binding.percent1.setText("61.15%");
+                break;
+
+            case "Hobby":
+                // Show only Home category
+                binding.groupCategory1.setVisibility(View.GONE);
+                binding.groupCategory2.setVisibility(View.VISIBLE);
+                binding.groupCategory3.setVisibility(View.GONE);
+                binding.cat2.setText("Hobby");
+                binding.money2.setText("123,45€");
+                binding.percent2.setText("28.87%");
+                break;
+
+            case "Other":
+                // Show only Other category
+                binding.groupCategory1.setVisibility(View.GONE);
+                binding.groupCategory2.setVisibility(View.GONE);
+                binding.groupCategory3.setVisibility(View.VISIBLE);
+                binding.cat3.setText("Other");
+                binding.money3.setText("42,69€");
+                binding.percent3.setText("9.98%");
+                break;
+
+            default:
+                // Hide all categories
+                binding.groupCategory1.setVisibility(View.GONE);
+                binding.groupCategory2.setVisibility(View.GONE);
+                binding.groupCategory3.setVisibility(View.GONE);
+                break;
         }
+
+        //        if (category.equals("All")) {
+//            binding.cat1.setText("Food");
+//            binding.cat2.setText("Hobby");
+//            binding.cat3.setText("Other");
+//            binding.cat2.setVisibility(View.VISIBLE);
+//            binding.cat3.setVisibility(View.VISIBLE);
+//        } else {
+//            binding.cat1.setText(category);
+//            binding.cat2.setVisibility(View.GONE);
+//            binding.cat3.setVisibility(View.GONE);
+//        }
     }
     @Override
     public void onDestroyView() {
