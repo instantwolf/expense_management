@@ -10,6 +10,7 @@ import java.util.List;
 public class HomeViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText = new MutableLiveData<>();
+    private final MutableLiveData<String> selectedCategory = new MutableLiveData<>();
 
     // Define the time interval data
     public final List<String> timeIntervalData = new ArrayList<>();
@@ -25,14 +26,20 @@ public class HomeViewModel extends ViewModel {
         timeIntervalData.add("48 hour");
 
         // Initialize the time interval data
+        expenseCategoryData.add("All");
         expenseCategoryData.add("Food");
-        expenseCategoryData.add("Rent");
-        expenseCategoryData.add("Entertainment");
-        expenseCategoryData.add("Work");
         expenseCategoryData.add("Hobby");
         expenseCategoryData.add("Other");
 
         mText.setValue("This is the home/dashboard fragment");
+    }
+
+    public void setSelectedCategory(String category) {
+        selectedCategory.setValue(category);
+    }
+
+    public LiveData<String> getSelectedCategory() {
+        return selectedCategory;
     }
 
     public List<String> getTimeIntervalData() { return timeIntervalData; }

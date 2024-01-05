@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -32,9 +33,12 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initSpinners();
+        observeCategorySelection();
     }
 
     private void initSpinners() {
+        if (getContext() == null) return;
+
         List<String> timeIntervalData = homeViewModel.getTimeIntervalData();
         List<String> expenseCategoryData = homeViewModel.getExpenseCategoryData();
 
@@ -49,8 +53,47 @@ public class HomeFragment extends Fragment {
 
         timeIntervalSpinner.setAdapter(timerIntervalAdapter);
         expenseCategorySpinner.setAdapter(expenseCategoryAdapter);
+
+        ReadCategorySpinner();
     }
 
+    private void observeCategorySelection(){
+        homeViewModel.getSelectedCategory().observe(getViewLifecycleOwner(), this::updateCategoryViews);
+    }
+
+    private void ReadCategorySpinner() {
+        Spinner categoriesSpinner = binding.expenseCategory;
+        categoriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    String selectedCategory = parent.getItemAtPosition(position).toString();
+                    homeViewModel.setSelectedCategory(selectedCategory);
+                } catch (Exception e) {
+                    e.printStackTrace(); // Log the exception to find out what's going wrong
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void updateCategoryViews(String category) {
+        if (category.equals("All")) {
+            binding.cat1.setText("Food");
+            binding.cat2.setText("Hobby");
+            binding.cat3.setText("Other");
+            binding.cat2.setVisibility(View.VISIBLE);
+            binding.cat3.setVisibility(View.VISIBLE);
+        } else {
+            binding.cat1.setText(category);
+            binding.cat2.setVisibility(View.GONE);
+            binding.cat3.setVisibility(View.GONE);
+        }
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
