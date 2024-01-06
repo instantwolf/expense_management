@@ -33,24 +33,34 @@ public class ChangePassword extends AppCompatActivity {
                     EditText editTextPassword2 = findViewById(R.id.editTextTextPassword2RepeatNewPasswordChangePassword);
                     String password = editTextPassword1.getText().toString();
                     String checkpassword = editTextPassword2.getText().toString();
-                    if(password.equals(checkpassword)){
-                        Intent intent = getIntent();
-                        //if (intent != null && intent.hasExtra("EMAIL_EXTRA")) {
+                    if(isValidPassword(password)){
+                        if(password.equals(checkpassword)){
+                            Intent intent = getIntent();
+                            //if (intent != null && intent.hasExtra("EMAIL_EXTRA")) {
                             String receivedEmail = intent.getStringExtra("email");
                             // Hier können Sie die erhaltene E-Mail-Adresse verwenden
-                        assert receivedEmail != null;
-                        SignUpActivity.changePassword(this,receivedEmail,password);
-                        //}
+                            assert receivedEmail != null;
+                            SignUpActivity.changePassword(this,receivedEmail,password);
+                            //}
 
-                        Toast.makeText(ChangePassword.this, "Passwort erfolgreich geändert!.", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(ChangePassword.this, LoginActivity.class));
+                            Toast.makeText(ChangePassword.this, "Passwort erfolgreich geändert!.", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(ChangePassword.this, LoginActivity.class));
+                        }
+                        else{
+                            Toast.makeText(ChangePassword.this, "Passwörter Matchen sich nicht.", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                     else{
-                        Toast.makeText(ChangePassword.this, "Passwörter Matchen sich nicht.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChangePassword.this,"Passwort >=5",Toast.LENGTH_SHORT).show();
+                    }
                     }
 
-                }
         );
 
+    }
+    private boolean isValidPassword(String password) {
+        // Überprüfen, ob das Passwort die Mindestlänge von 4 Zeichen hat
+        return password.length() >= 5;
     }
 }
