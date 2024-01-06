@@ -20,6 +20,8 @@ import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
 
+
+
     private static final String PREFS_NAME = "UserPrefs";
     private static final String PREF_EMAIL = "email";
     private static final String PREF_PASSWORD = "password";
@@ -61,10 +63,15 @@ public class SignUpActivity extends AppCompatActivity {
                 // Überprüfen, ob die E-Mail-Adresse gültig ist
                 if (isValidEmail(email)) {
                     if(isValidPassword(password)){
-                        saveUserCredentials(email, password);
-                        emailList.add(email);
-                        Toast.makeText(SignUpActivity.this, "Registrierung erfolgreich", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                        if(!emailList.contains(email)){
+                            saveUserCredentials(email, password);
+                            emailList.add(email);
+                            Toast.makeText(SignUpActivity.this, "Registrierung erfolgreich", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                        }
+                        else{
+                            Toast.makeText(SignUpActivity.this, "Email ist schon Registriert!!!", Toast.LENGTH_SHORT).show();
+                        }
                     }
                     // Benutzerdaten speichern
 
@@ -107,7 +114,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private boolean isValidPassword(String password) {
         // Überprüfen, ob das Passwort die Mindestlänge von 4 Zeichen hat
-        return password.length() >= 4;
+        return password.length() >= 5;
     }
     public static void changePassword(Context context, String email, String newPassword) {
         // Benutzerdaten aus SharedPreferences abrufen

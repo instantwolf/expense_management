@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import com.example.expensemanager.R;
 import com.example.expensemanager.ui.login.LoginViewModel;
 import com.example.expensemanager.ui.login.LoginViewModelFactory;
 import com.example.expensemanager.databinding.ActivityLoginBinding;
+import com.example.expensemanager.ui.reminder.ReminderFragment;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -71,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
             @Override
             public void onChanged(@Nullable LoginResult loginResult) {
+                /*
                 if (loginResult == null) {
                     return;
                 }
@@ -81,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
                 }
+
                 setResult(Activity.RESULT_OK);
 
 
@@ -90,6 +94,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Complete and destroy login activity once successful
                 finish();
+
+ */
             }
         });
 
@@ -124,15 +130,82 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // Changes
+
+        /*
         loginButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
                 //      loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
+
             }
         });
+
+         */
+
+        ImageButton imageButton = findViewById(R.id.imageButton);
+        imageButton.setOnClickListener(v -> {
+            String enteredEmail = usernameEditText.getText().toString();
+            String enteredPassword = passwordEditText.getText().toString();
+
+            // Example: Check if the entered email and password are correct
+            if (isValidAccount(enteredEmail, enteredPassword)) {
+                // If the account is valid, start the MainActivity5
+                // Get a Context object from the current activity
+                Intent mainActivityIntent = new Intent(context, MainActivity.class);
+                startActivity(mainActivityIntent);
+
+                //Complete and destroy login activity once successful
+                finish();
+                Toast.makeText(LoginActivity.this, "Welcome :-)", Toast.LENGTH_SHORT).show();
+            } else {
+                // If the account is not valid, you may show an error message
+                // or perform any other desired action.
+                Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button button = findViewById(R.id.buttonSignIn);
+
+        button.setOnClickListener(v -> {
+                    Intent intent1 = new Intent(LoginActivity.this, SignUpActivity.class);
+                    startActivity(intent1);
+                }
+        );
+
+        TextView textView = findViewById(R.id.textViewForgotPassword);
+
+        textView.setOnClickListener(v -> {
+                    Intent intent = new Intent(LoginActivity.this, LogInForgotPassword.class);
+                    startActivity(intent);
+                }
+
+        );
+
     }
+
+
+    private boolean isValidAccount(String enteredEmail, String enteredPassword) {
+        // Beispiel: Hardcoded-Email und Passwort für Tests
+        String correctEmail = "test@example.com";
+        String correctPassword = "123456";
+
+        // Überprüfen, ob die eingegebenen Daten mit den gespeicherten Daten übereinstimmen
+        if (SignUpActivity.checkCredentials(this, enteredEmail, enteredPassword)) {
+            // Die eingegebenen Daten stimmen mit den gespeicherten Daten überein
+            return true;
+        } else {
+            // Die eingegebenen Daten stimmen nicht mit den gespeicherten Daten überein
+            // Überprüfen Sie die eingegebenen Daten mit den festgelegten Werten für diese LoginActivity
+            return enteredEmail.equals(correctEmail) && enteredPassword.equals(correctPassword);
+        }
+    }
+
+    // End changes
 
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
