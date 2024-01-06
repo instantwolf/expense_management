@@ -88,9 +88,14 @@ public class HistoryFragment extends Fragment {
             layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID;
             layoutParams.topMargin = dpToPx(10);
 
+            layoutParams.leftMargin = dpToPx(20);
+            layoutParams.rightMargin = dpToPx(20);
+
+
             card.setLayoutParams(layoutParams);
             card.setCardElevation(dpToPx(10));
             card.setRadius(dpToPx(10));
+
 
             // Erstellen des RelativeLayouts
             RelativeLayout relativeLayout = new RelativeLayout(getActivity());

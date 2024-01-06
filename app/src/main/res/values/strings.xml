@@ -49,4 +49,7 @@
         <item>$ USD</item>
         <item>₽ RUB</item>
     </string-array>
+    <string name="logout_text"><u>Log Out</u></string>
+    <string name="change_pw_text"><u>Change Password</u></string>
+
 </resources>
