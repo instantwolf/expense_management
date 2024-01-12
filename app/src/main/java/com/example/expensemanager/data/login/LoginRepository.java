@@ -1,6 +1,6 @@
-package com.example.expensemanager.data;
+package com.example.expensemanager.data.login;
 
-import com.example.expensemanager.data.model.LoggedInUser;
+import com.example.expensemanager.data.login.model.LoggedInUser;
 
 /**
  * Class that requests authentication and user information from the remote data source and

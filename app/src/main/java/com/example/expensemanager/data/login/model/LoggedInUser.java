@@ -1,4 +1,4 @@
-package com.example.expensemanager.data.model;
+package com.example.expensemanager.data.login.model;
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository

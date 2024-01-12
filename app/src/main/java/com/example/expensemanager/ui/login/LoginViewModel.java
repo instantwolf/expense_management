@@ -6,9 +6,9 @@ import androidx.lifecycle.ViewModel;
 
 import android.util.Patterns;
 
-import com.example.expensemanager.data.LoginRepository;
-import com.example.expensemanager.data.Result;
-import com.example.expensemanager.data.model.LoggedInUser;
+import com.example.expensemanager.data.login.LoginRepository;
+import com.example.expensemanager.data.login.Result;
+import com.example.expensemanager.data.login.model.LoggedInUser;
 import com.example.expensemanager.R;
 
 public class LoginViewModel extends ViewModel {

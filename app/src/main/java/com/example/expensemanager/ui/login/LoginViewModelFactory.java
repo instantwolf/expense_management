@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.annotation.NonNull;
 
-import com.example.expensemanager.data.LoginDataSource;
-import com.example.expensemanager.data.LoginRepository;
+import com.example.expensemanager.data.login.LoginDataSource;
+import com.example.expensemanager.data.login.LoginRepository;
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.
