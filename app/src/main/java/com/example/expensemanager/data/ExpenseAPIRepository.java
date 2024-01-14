@@ -1,7 +1,8 @@
-package com.example.expensemanager.data.expenses;
+package com.example.expensemanager.data;
 
 import com.example.expensemanager.data.category.CategoryRepository;
 import com.example.expensemanager.data.category.model.Category;
+import com.example.expensemanager.data.expenses.ExpenseDataSource;
 import com.example.expensemanager.data.expenses.model.Expense;
 
 import java.time.LocalDate;
@@ -9,9 +10,9 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 
-public class ExpenseRepository {
+public class ExpenseAPIRepository {
 
-    private static volatile ExpenseRepository instance;
+    private static volatile ExpenseAPIRepository instance;
 
     private ExpenseDataSource dataSource;
 
@@ -20,14 +21,14 @@ public class ExpenseRepository {
     private ArrayList<Expense> expenses;
 
     // private constructor : singleton access
-    private ExpenseRepository(ExpenseDataSource dataSource) {
+    private ExpenseAPIRepository(ExpenseDataSource dataSource) {
         this.dataSource = dataSource;
         this.expenses = new ArrayList<>();
     }
 
-    public static ExpenseRepository getInstance(ExpenseDataSource dataSource) {
+    public static ExpenseAPIRepository getInstance(ExpenseDataSource dataSource) {
         if (instance == null) {
-            instance = new ExpenseRepository(dataSource);
+            instance = new ExpenseAPIRepository(dataSource);
         }
         return instance;
     }
@@ -47,10 +48,10 @@ public class ExpenseRepository {
      * @param title the title that the expense is declared under
      * @param amount the amount that was spent within the expense
      * @param date the date that the expense happened
-     * @param category may be null if no category has been assigned
+     * @param categoryName may be null if no category has been assigned
      * @return
      */
-    public static Expense addExpense(String title, double amount, LocalDate date, Category category){
+    public static Expense addExpense(String title, double amount, LocalDate date, String categoryName){
         Expense created =  new Expense(getNextId(),title,amount,date, category);
         instance.expenses.add(created);
         CategoryRepository.addExpenseToCategory(created);
