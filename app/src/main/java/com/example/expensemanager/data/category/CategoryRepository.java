@@ -5,7 +5,6 @@ import com.example.expensemanager.data.expenses.model.Expense;
 
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class CategoryRepository {
 
