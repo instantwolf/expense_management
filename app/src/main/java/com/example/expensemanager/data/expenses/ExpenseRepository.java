@@ -13,21 +13,20 @@ public class ExpenseRepository {
 
     private static volatile ExpenseRepository instance;
 
-    private ExpenseDataSource dataSource;
+    private static ExpenseDataSource dataSource = new ExpenseDataSource();
 
     // If expenses credentials will be cached in local storage, it is recommended it be encrypted
     // @see https://developer.android.com/training/articles/keystore
     private ArrayList<Expense> expenses;
 
     // private constructor : singleton access
-    private ExpenseRepository(ExpenseDataSource dataSource) {
-        this.dataSource = dataSource;
+    private ExpenseRepository() {
         this.expenses = new ArrayList<>();
     }
 
-    public static ExpenseRepository getInstance(ExpenseDataSource dataSource) {
+    public static ExpenseRepository getInstance() {
         if (instance == null) {
-            instance = new ExpenseRepository(dataSource);
+            instance = new ExpenseRepository();
         }
         return instance;
     }
@@ -35,9 +34,9 @@ public class ExpenseRepository {
     public static boolean removeExpenseById(int id){
         boolean found = false;
 
-        Optional<Expense> optionalExpense = instance.expenses.stream().filter(x -> x.getId() == id).findAny();
+        Optional<Expense> optionalExpense = getInstance().expenses.stream().filter(x -> x.getId() == id).findAny();
         if(optionalExpense.isPresent()){
-            instance.expenses.remove(optionalExpense.get());
+            getInstance().expenses.remove(optionalExpense.get());
             found = true;
         }
         return found;
@@ -52,7 +51,7 @@ public class ExpenseRepository {
      */
     public static Expense addExpense(String title, double amount, LocalDate date, Category category){
         Expense created =  new Expense(getNextId(),title,amount,date, category);
-        instance.expenses.add(created);
+        getInstance().expenses.add(created);
         CategoryRepository.addExpenseToCategory(created);
         return created;
     }
@@ -63,7 +62,7 @@ public class ExpenseRepository {
     }
 
     public static Optional<Expense> getExpenseById(int id){
-        return instance.expenses.stream().filter(x -> x.getId() == id).findAny();
+        return getInstance().expenses.stream().filter(x -> x.getId() == id).findAny();
     }
 
 
@@ -73,7 +72,7 @@ public class ExpenseRepository {
     }
 
     private static int getHighestNumber(){
-        return instance.expenses.stream().mapToInt(Expense::getId).max()
+        return getInstance().expenses.stream().mapToInt(Expense::getId).max()
                 .orElseGet(() -> {return 0; }); //if the array if empty , 1 is returned, otherwise highest number+1
 
     }
