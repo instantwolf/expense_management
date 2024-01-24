@@ -20,6 +20,7 @@ public class ChangePassword extends AppCompatActivity {
         ImageButton returnButton = findViewById(R.id.imageButton3ReturnChangePassword);
 
         returnButton.setOnClickListener(v -> {
+
                     Intent intent1 = new Intent(ChangePassword.this, LogInForgotPassword.class);
                     startActivity(intent1);
                 }

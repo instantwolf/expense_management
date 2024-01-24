@@ -126,7 +126,7 @@
         app:layout_constraintTop_toBottomOf="@+id/settings.yearly.text" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/Spinner"
         android:layout_width="140dp"
         android:layout_height="30dp"
         android:layout_marginTop="40dp"

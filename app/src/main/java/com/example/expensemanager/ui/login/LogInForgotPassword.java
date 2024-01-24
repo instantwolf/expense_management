@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.expensemanager.R;
+import com.example.expensemanager.ui.settings.SettingsFragment;
 
 public class LogInForgotPassword extends AppCompatActivity {
     public String emailToCheck;
@@ -27,11 +28,36 @@ public class LogInForgotPassword extends AppCompatActivity {
 
         ImageButton returnButton = findViewById(R.id.imageButton3ReturnLogInForgotPassword);
 
+        Intent intent = getIntent();
+        if (intent != null) {
+            String aufruferActivity = intent.getStringExtra("AUFRUFER_ACTIVITY");
+
+
+            // Hier kannst du die Logik implementieren, basierend auf den Informationen im Intent
+            if ("Settings".equals(aufruferActivity)) {
+                returnButton.setOnClickListener(v -> {
+                            Intent intent1 = new Intent(LogInForgotPassword.this, SettingsFragment.class);
+                            startActivity(intent1);
+                        }
+                );
+                // Logik für den Aufruf aus der "Settings"-Activity
+            } else {
+                returnButton.setOnClickListener(v -> {
+                            Intent intent1 = new Intent(LogInForgotPassword.this, LoginActivity.class);
+                            startActivity(intent1);
+                        }
+                );
+                // Default-Logik, wenn die aufrufende Activity nicht erkannt wird
+            }
+        }
+        /*
         returnButton.setOnClickListener(v -> {
                     Intent intent1 = new Intent(LogInForgotPassword.this, LoginActivity.class);
                     startActivity(intent1);
                 }
         );
+
+         */
 
 
         ImageButton imageButton = findViewById(R.id.imageButton2ForgotPassword);
@@ -64,6 +90,7 @@ public class LogInForgotPassword extends AppCompatActivity {
                 // Hier den Code für den Übergang zu einer neuen Aktivität einfügen
                  Intent intent = new Intent(LogInForgotPassword.this, ChangePassword.class);
                  intent.putExtra("email", emailToCheck);
+                intent.putExtra("AUFRUFER_ACTIVITY", "LogInForgotPassword");
                  startActivity(intent);
             }
         });
