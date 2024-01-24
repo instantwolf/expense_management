@@ -10,15 +10,18 @@ public class Category {
 
     String name;
 
-    ArrayList<Expense> expenses;
+    //ArrayList<Expense> expenses;
 
     public Category(int id, String name) {
         this.id = id;
         this.name = name;
-        this.expenses = new ArrayList<>();
+     //   this.expenses = new ArrayList<>();
     }
 
+
     public int getId(){ return this.id; }
+
+    public String getName(){ return this.name; }
 
     public boolean matches(String name){
         return getEqualityString(this.name).equals(getEqualityString(name));

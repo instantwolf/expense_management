@@ -6,6 +6,10 @@ import com.example.expensemanager.data.expenses.model.Expense;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -53,7 +57,7 @@ public class ExpenseRepository {
     public static Expense addExpense(String title, double amount, LocalDate date, Category category){
         Expense created =  new Expense(getNextId(),title,amount,date, category);
         instance.expenses.add(created);
-        CategoryRepository.addExpenseToCategory(created);
+       // CategoryRepository.addExpenseToCategory(created);
         return created;
     }
 
@@ -64,9 +68,18 @@ public class ExpenseRepository {
 
     public static Optional<Expense> getExpenseById(int id){
         return instance.expenses.stream().filter(x -> x.getId() == id).findAny();
+
     }
 
+    public static Collection<Expense> getAllExpenses(){
+        return instance.expenses;
+    }
 
+    public static Collection<Expense> getAllExpensesSortedByDateAsc(){
+        return Collections.sort(instance.expenses, new Comparator<Expense>() {
+
+        });
+    }
 
     private static int getNextId(){
       return getHighestNumber()+1;

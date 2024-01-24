@@ -68,16 +68,6 @@ public class CategoryRepository {
       return optionalCategory;
     }
 
-    public static boolean addExpenseToCategory(Expense expense){
-        boolean found = false;
-
-        Optional<Category> optionalCategory = getCategoryById(expense.getCategory().getId());
-        if(optionalCategory.isPresent()){
-            instance.categories.remove(optionalCategory.get());
-            found = true;
-        }
-        return found;
-    }
 
     public static Category getDefaultCategory(){
         return DEFAULT_CATEGORY;
@@ -94,6 +84,15 @@ public class CategoryRepository {
     public static Collection<Category> getAllDisplayCategories(){
         return instance.categories.stream().filter(x -> !x.equals(getDefaultCategory())).collect(Collectors.toList());
     }
+
+    public static Collection<String> getDisplayableCategoryNames(){
+        return instance.categories.stream().filter(x -> !x.equals(getDefaultCategory())).map(Category::getName).collect(Collectors.toList());
+    }
+
+    public static Collection<String> getCategoryNames(){
+        return instance.categories.stream().map(Category::getName).collect(Collectors.toList());
+    }
+
 
 
 
