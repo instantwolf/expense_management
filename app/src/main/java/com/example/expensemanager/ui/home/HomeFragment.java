@@ -1,6 +1,7 @@
 package com.example.expensemanager.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +20,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.expensemanager.R;
+import com.example.expensemanager.data.category.CategoryRepository;
+import com.example.expensemanager.data.category.model.Category;
 import com.example.expensemanager.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -42,16 +46,10 @@ public class HomeFragment extends Fragment {
         initSpinners();
         observeCategorySelection();
 
-        AnyChartView anyChartView = view.findViewById(R.id.anychartview);
-        Pie pie = AnyChart.pie();
-
-        List<DataEntry> data = new ArrayList<>();
-        data.add(new CustomDataEntry("Data 1", 10));
-        data.add(new CustomDataEntry("Data 2", 20));
-        data.add(new CustomDataEntry("Data 3", 30));
-
-        pie.data(data);
-        anyChartView.setChart(pie);
+        Collection<Category> categories = CategoryRepository.getAllCategories();
+        for (Category category: categories) {
+            System.out.println(category.getName());
+        }
     }
 
     private void initSpinners() {
