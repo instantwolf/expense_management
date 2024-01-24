@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 public class ExpenseRepository {
@@ -68,7 +69,6 @@ public class ExpenseRepository {
 
     public static Optional<Expense> getExpenseById(int id){
         return instance.expenses.stream().filter(x -> x.getId() == id).findAny();
-
     }
 
     public static Collection<Expense> getAllExpenses(){
@@ -76,19 +76,50 @@ public class ExpenseRepository {
     }
 
     public static Collection<Expense> getAllExpensesSortedByDateAsc(){
-        return Collections.sort(instance.expenses, new Comparator<Expense>() {
-
-        });
+        return getSortedExpenses(Expense::compareByDateAsc);
     }
 
+    public static Collection<Expense> getAllExpensesSortedByDateDesc(){
+        return getSortedExpenses(Expense::compareByDateDesc);
+    }
+
+    public static Collection<Expense> getAllExpensesSortedByAmountAsc(){
+        return getSortedExpenses(Expense::compareByDateAsc);
+    }
+
+    public static Collection<Expense> getAllExpensesSortedByAmountDesc(){
+        return getSortedExpenses(Expense::compareByAmountDesc);
+    }
+
+
+    public static Collection<Expense> getExpensesByCategoryId(int id){
+        return instance.expenses.stream()
+                .filter(x -> x.getCategory().getId() == id)
+                .collect(Collectors.toList());
+    }
+
+    public static Collection<Expense> getExpensesByDateRange(LocalDate from, LocalDate to){
+        return instance.expenses.stream()
+                .filter(x ->
+                        x.getDate().compareTo(from) >= 0
+                                && x.getDate().compareTo(to) <= 0)
+                .collect(Collectors.toList());
+    }
+
+    public static Collection<Expense> getSortedExpenses(Comparator<Expense> comp){
+        List<Expense> listToSort = instance.expenses;
+        Collections.sort(listToSort, comp);
+        return listToSort;
+    }
+
+    //if the array if empty , 1 is returned, otherwise highest number+1
     private static int getNextId(){
       return getHighestNumber()+1;
     }
 
     private static int getHighestNumber(){
         return instance.expenses.stream().mapToInt(Expense::getId).max()
-                .orElseGet(() -> {return 0; }); //if the array if empty , 1 is returned, otherwise highest number+1
-
+                .orElse(0);
     }
 
 
