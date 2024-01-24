@@ -4,7 +4,10 @@ import com.example.expensemanager.data.category.model.Category;
 import com.example.expensemanager.data.expenses.model.Expense;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CategoryRepository {
 
@@ -42,14 +45,18 @@ public class CategoryRepository {
         return found;
     }
 
-    /**
-    public static void addDefaultCategory() {
-        instance.categories.add(DEFAULT_CATEGORY);
-    }
-     */
 
     public static Category addCategoryIfNotExists(String name){
+        //check if default name
+        if(getDefaultCategory().matches(name) || name.trim().length() == 0){
+            return getDefaultCategory();
+        }
+        //if matches something then return it
+        Optional<Category> category =  getCategoryByName(name);
+        if(category.isPresent())
+            return category.get();
 
+        //else create a new one
         Category created =  new Category(getNextId(),name);
         instance.categories.add(created);
         return created;
@@ -64,7 +71,7 @@ public class CategoryRepository {
     public static boolean addExpenseToCategory(Expense expense){
         boolean found = false;
 
-        Optional<Category> optionalCategory = getCategoryById(expense.getExpenseCategory().getId());
+        Optional<Category> optionalCategory = getCategoryById(expense.getCategory().getId());
         if(optionalCategory.isPresent()){
             instance.categories.remove(optionalCategory.get());
             found = true;
@@ -80,6 +87,16 @@ public class CategoryRepository {
         return instance.categories.stream().filter(x -> x.getId() == id).findAny();
     }
 
+    public static Collection<Category> getAllCategories(){
+        return instance.categories;
+    }
+
+    public static Collection<Category> getAllDisplayCategories(){
+        return instance.categories.stream().filter(x -> !x.equals(getDefaultCategory())).collect(Collectors.toList());
+    }
+
+
+
     private static int getNextId(){
       return getHighestNumber()+1;
     }
@@ -89,6 +106,8 @@ public class CategoryRepository {
                 .orElseGet(() -> {return 0; }); //if the array if empty , 1 is returned, otherwise highest number+1
 
     }
+
+
 
 
 }

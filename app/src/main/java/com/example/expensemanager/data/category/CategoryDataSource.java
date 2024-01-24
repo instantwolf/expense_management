@@ -15,7 +15,7 @@ public class CategoryDataSource {
     public ArrayList<Category> getData() {
             //provide Default Data here
             ArrayList<Category> demoData = new ArrayList<>();
-            seedData(demoData);
+          //  seedData(demoData);
             return demoData;
     }
 
