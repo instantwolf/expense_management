@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 
 import com.example.expensemanager.databinding.FragmentSettingsBinding;
+import com.example.expensemanager.ui.login.LogInForgotPassword;
 import com.example.expensemanager.ui.login.LoginActivity;
 import com.example.expensemanager.ui.login.ChangePassword;
 
@@ -42,7 +43,7 @@ public class SettingsFragment extends Fragment {
         EditText editTextNumberDecimal3 = binding.editTextNumberDecimal3;
 
 
-        Spinner currencySpinner = binding.spinner; // Stellen Sie sicher, dass dies die korrekte ID Ihres Spinners ist
+        Spinner currencySpinner = binding.Spinner; // Stellen Sie sicher, dass dies die korrekte ID Ihres Spinners ist
         currencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -70,7 +71,8 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (getActivity() != null) {
-                    Intent intent = new Intent(getActivity(), ChangePassword.class);
+                    Intent intent = new Intent(getActivity(), LogInForgotPassword.class);
+                    intent.putExtra("AUFRUFER_ACTIVITY", "Settings");
                     startActivity(intent);
                 }
             }
