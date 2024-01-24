@@ -184,7 +184,6 @@
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="cat_3,money_3,percent_3" />
 
-
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="299dp"
