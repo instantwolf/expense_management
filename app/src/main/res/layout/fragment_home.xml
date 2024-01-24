@@ -184,12 +184,11 @@
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="cat_3,money_3,percent_3" />
 
-    <ImageView
-        android:id="@+id/imageView3"
+    <com.anychart.AnyChartView
+        android:id="@+id/anychartview"
         android:layout_width="299dp"
         android:layout_height="377dp"
         android:layout_marginTop="24dp"
-        android:src="@drawable/circle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
