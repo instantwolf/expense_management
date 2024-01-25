@@ -15,21 +15,20 @@ public class CategoryRepository {
 
     private static volatile CategoryRepository instance;
 
-    private CategoryDataSource dataSource;
+    private static CategoryDataSource dataSource = new CategoryDataSource();
 
     private ArrayList<Category> categories;
 
     // private constructor : singleton access
-    private CategoryRepository(CategoryDataSource dataSource) {
-        this.dataSource = dataSource;
+    private CategoryRepository() {
         this.categories = new ArrayList<>();
         this.categories.add(DEFAULT_CATEGORY);
-        this.categories.addAll(dataSource.getData());
+       this.categories.addAll(dataSource.getData());
     }
 
-    public static CategoryRepository getInstance(CategoryDataSource dataSource) {
+    public static CategoryRepository getInstance() {
         if (instance == null) {
-            instance = new CategoryRepository(dataSource);
+            instance = new CategoryRepository();
         }
         return instance;
     }
@@ -58,7 +57,7 @@ public class CategoryRepository {
 
         //else create a new one
         Category created =  new Category(getNextId(),name);
-        instance.categories.add(created);
+        getInstance().categories.add(created);
         return created;
     }
 
@@ -68,21 +67,31 @@ public class CategoryRepository {
       return optionalCategory;
     }
 
+    public static boolean addExpenseToCategory(Expense expense){
+        boolean found = false;
+
+        Optional<Category> optionalCategory = getCategoryById(expense.getCategory().getId());
+        if(optionalCategory.isPresent()){
+            getInstance().categories.remove(optionalCategory.get());
+            found = true;
+        }
+        return found;
+    }
 
     public static Category getDefaultCategory(){
         return DEFAULT_CATEGORY;
     }
 
     public static Optional<Category> getCategoryById(int id){
-        return instance.categories.stream().filter(x -> x.getId() == id).findAny();
+        return getInstance().categories.stream().filter(x -> x.getId() == id).findAny();
     }
 
     public static Collection<Category> getAllCategories(){
-        return instance.categories;
+        return getInstance().categories;
     }
 
     public static Collection<Category> getAllDisplayCategories(){
-        return instance.categories.stream().filter(x -> !x.equals(getDefaultCategory())).collect(Collectors.toList());
+        return getInstance().categories.stream().filter(x -> !x.equals(getDefaultCategory())).collect(Collectors.toList());
     }
 
     public static Collection<String> getDisplayableCategoryNames(){
@@ -101,7 +110,7 @@ public class CategoryRepository {
     }
 
     private static int getHighestNumber(){
-        return instance.categories.stream().mapToInt(Category::getId).max()
+        return getInstance().categories.stream().mapToInt(Category::getId).max()
                 .orElseGet(() -> {return 0; }); //if the array if empty , 1 is returned, otherwise highest number+1
 
     }
