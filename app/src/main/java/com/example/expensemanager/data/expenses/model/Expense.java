@@ -23,7 +23,25 @@ public class Expense {
         this.date = date;
         this.category = category;
     }
+    public static int compareByDateAsc(Expense e1, Expense e2){
+       return e1.getDate().compareTo(e2.getDate());
+    }
 
+    public static int compareByDateDesc(Expense e1, Expense e2){
+        return e1.getDate().compareTo(e2.getDate()) * -1 ;
+    }
+
+    public static int compareByAmountDesc(Expense e1, Expense e2){
+        return Double.compare(e1.getAmount(), e2.getAmount()) * -1;
+    }
+
+    public static int compareByAmountAsc(Expense e1, Expense e2){
+        return Double.compare(e1.getAmount(), e2.getAmount()) ;
+    }
+
+    public double getAmount(){ return this.amount; }
+
+    public LocalDate getDate(){ return this.date; }
 
     public int getId(){ return this.id; }
 

@@ -94,6 +94,15 @@ public class CategoryRepository {
         return getInstance().categories.stream().filter(x -> !x.equals(getDefaultCategory())).collect(Collectors.toList());
     }
 
+    public static Collection<String> getDisplayableCategoryNames(){
+        return instance.categories.stream().filter(x -> !x.equals(getDefaultCategory())).map(Category::getName).collect(Collectors.toList());
+    }
+
+    public static Collection<String> getCategoryNames(){
+        return instance.categories.stream().map(Category::getName).collect(Collectors.toList());
+    }
+
+
 
 
     private static int getNextId(){
