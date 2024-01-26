@@ -25,9 +25,6 @@ public class HomeGraph {
     }
 
     public void drawGraph() {
-        // Clear existing data first
-        chartData.clear();
-
         // Fetch and add new data
         ExpenseRepository.getAllExpenses();
         Collection<Category> categories = CategoryRepository.getAllCategories();
@@ -42,6 +39,10 @@ public class HomeGraph {
         pie.data(chartData);
         anychartView.setChart(pie);
         anychartView.invalidate();
+    }
+
+    public void clearData() {
+        chartData.clear();
     }
 
     private static double getCategoryValue(Category category) {

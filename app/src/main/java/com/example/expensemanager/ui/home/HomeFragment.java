@@ -33,6 +33,7 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     private HomeViewModel homeViewModel;
+    private HomeGraph homeGraph;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -51,10 +52,11 @@ public class HomeFragment extends Fragment {
 
         AnyChartView anyChartView = view.findViewById(R.id.anychartview);
 
-        HomeGraph homeGraph = new HomeGraph(anyChartView, chartData);
-        homeGraph.drawGraph();
-    }
+        homeGraph = new HomeGraph(anyChartView, chartData);
 
+        homeGraph.drawGraph();
+        homeGraph.clearData();
+    }
     private void initSpinners() {
         if (getContext() == null) return;
 
