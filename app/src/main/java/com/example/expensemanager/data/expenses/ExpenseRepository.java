@@ -6,7 +6,12 @@ import com.example.expensemanager.data.expenses.model.Expense;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 public class ExpenseRepository {
@@ -53,7 +58,7 @@ public class ExpenseRepository {
     public static Expense addExpense(String title, double amount, LocalDate date, Category category){
         Expense created =  new Expense(getNextId(),title,amount,date, category);
         instance.expenses.add(created);
-        CategoryRepository.addExpenseToCategory(created);
+       // CategoryRepository.addExpenseToCategory(created);
         return created;
     }
 
@@ -66,16 +71,55 @@ public class ExpenseRepository {
         return instance.expenses.stream().filter(x -> x.getId() == id).findAny();
     }
 
+    public static Collection<Expense> getAllExpenses(){
+        return instance.expenses;
+    }
+
+    public static Collection<Expense> getAllExpensesSortedByDateAsc(){
+        return getSortedExpenses(Expense::compareByDateAsc);
+    }
+
+    public static Collection<Expense> getAllExpensesSortedByDateDesc(){
+        return getSortedExpenses(Expense::compareByDateDesc);
+    }
+
+    public static Collection<Expense> getAllExpensesSortedByAmountAsc(){
+        return getSortedExpenses(Expense::compareByDateAsc);
+    }
+
+    public static Collection<Expense> getAllExpensesSortedByAmountDesc(){
+        return getSortedExpenses(Expense::compareByAmountDesc);
+    }
 
 
+    public static Collection<Expense> getExpensesByCategoryId(int id){
+        return instance.expenses.stream()
+                .filter(x -> x.getCategory().getId() == id)
+                .collect(Collectors.toList());
+    }
+
+    public static Collection<Expense> getExpensesByDateRange(LocalDate from, LocalDate to){
+        return instance.expenses.stream()
+                .filter(x ->
+                        x.getDate().compareTo(from) >= 0
+                                && x.getDate().compareTo(to) <= 0)
+                .collect(Collectors.toList());
+    }
+
+    public static Collection<Expense> getSortedExpenses(Comparator<Expense> comp){
+        List<Expense> listToSort = instance.expenses;
+        Collections.sort(listToSort, comp);
+        return listToSort;
+    }
+
+    //if the array if empty , 1 is returned, otherwise highest number+1
     private static int getNextId(){
       return getHighestNumber()+1;
     }
 
     private static int getHighestNumber(){
         return instance.expenses.stream().mapToInt(Expense::getId).max()
-                .orElseGet(() -> {return 0; }); //if the array if empty , 1 is returned, otherwise highest number+1
-
+                .orElse(0);
     }
 
 
