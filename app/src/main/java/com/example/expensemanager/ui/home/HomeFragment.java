@@ -1,7 +1,6 @@
 package com.example.expensemanager.ui.home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,6 @@ import com.example.expensemanager.R;
 import com.example.expensemanager.data.category.CategoryRepository;
 import com.example.expensemanager.data.category.model.Category;
 import com.example.expensemanager.data.expenses.ExpenseRepository;
-import com.example.expensemanager.data.expenses.model.Expense;
 
 import com.example.expensemanager.databinding.FragmentHomeBinding;
 
@@ -49,35 +47,20 @@ public class HomeFragment extends Fragment {
         initSpinners();
         observeCategorySelection();
 
-        AnyChartView anyChartView = view.findViewById(R.id.anychartview);
-        Pie pie = AnyChart.pie();
-
-        DrawGraph(anyChartView, pie);
-    }
-
-    private void DrawGraph(AnyChartView view, Pie pie) {
         List<DataEntry> chartData = new ArrayList<>();
-        ExpenseRepository.getAllExpenses();
-        Collection<Category> categories = CategoryRepository.getAllCategories();
-        for (Category category: categories) {
-            double categoryValue = getCategoryValue(category);
-            chartData.add(new ValueDataEntry(category.getName(), categoryValue));
-        }
 
-        pie.data(chartData);
-        view.setChart(pie);
-    }
+        AnyChartView anyChartView = view.findViewById(R.id.anychartview);
 
-    private double getCategoryValue(Category category) {
-        return ExpenseRepository.getAmountByCategoryId(category.getId());
+        HomeGraph homeGraph = new HomeGraph(anyChartView, chartData);
+        homeGraph.drawGraph();
     }
 
     private void initSpinners() {
         if (getContext() == null) return;
 
         List<String> timeIntervalData = homeViewModel.getTimeIntervalData();
-        List<String> expenseCategoryData = homeViewModel.getExpenseCategoryData();
-
+        Collection<String> expenseCategoryDataCollection = CategoryRepository.getCategoryNames();
+        List<String> expenseCategoryData = new ArrayList<>(expenseCategoryDataCollection);
         Spinner timeIntervalSpinner = binding.timeInterval;
         Spinner expenseCategorySpinner = binding.expenseCategory;
 

@@ -13,16 +13,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.expensemanager.R;
 //import com.example.expensemanager.data.expenses.model.Expense;
+import com.example.expensemanager.data.expenses.ExpenseRepository;
 import com.example.expensemanager.databinding.FragmentExpenseBinding;
 import com.example.expensemanager.ui.history.ExpenseData;
 import com.example.expensemanager.ui.login.LogInForgotPassword;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Locale;
 
@@ -32,6 +35,8 @@ public class ExpenseFragment extends Fragment {
 
     private EditText editTextTitle;
     private EditText editTextAmount;
+
+    private EditText editTextCategory;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -53,6 +58,7 @@ public class ExpenseFragment extends Fragment {
         Button buttonSave = binding.buttonSave;
         editTextTitle = binding.fragmentExpenseEditTextTitle;
         editTextAmount = binding.fragmentExpenseEditTextAmount;
+        editTextCategory = binding.fragmentExpenseEditTextCategory;
 
         Button buttonCancel = binding.buttonCancel;
         buttonCancel.setOnClickListener(new View.OnClickListener() {
@@ -85,13 +91,12 @@ public class ExpenseFragment extends Fragment {
         // Annahme: Du hast eine Expense-Klasse mit Konstruktor und getter/setter-Methoden
         String title = editTextTitle.getText().toString();
         String amountString = editTextAmount.getText().toString();
+        String category = editTextCategory.getText().toString();
         double amount = Double.parseDouble(amountString);
-        String currentDate = getCurrentDate();
-        ExpenseData newExpense = new ExpenseData(title,amountString,currentDate);
-
+        LocalDate date = LocalDate.now();
 
         // Hier könntest du den neuen Expense speichern oder weitere Aktionen durchführen
-
+        ExpenseRepository.addExpense(title, amount, date, category);
         // Erfolgsmeldung anzeigen
         showToast("Expense erfolgreich erstellt");
 
