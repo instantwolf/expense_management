@@ -22,6 +22,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.expensemanager.R;
 import com.example.expensemanager.data.category.CategoryRepository;
 import com.example.expensemanager.data.category.model.Category;
+import com.example.expensemanager.data.expenses.ExpenseRepository;
+import com.example.expensemanager.data.expenses.model.Expense;
 import com.example.expensemanager.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
@@ -55,6 +57,11 @@ public class HomeFragment extends Fragment {
             int categoryValue = getCategoryValue(category);
             chartData.add(new ValueDataEntry(category.getName(), categoryValue));
         }
+
+        Collection<Expense> expenses = ExpenseRepository.getAllExpenses();
+//        for (Expense expense: expenses) {
+//            System.out.println("Expense Value: " + expense );
+//        }
 
         pie.data(chartData);
         anyChartView.setChart(pie
