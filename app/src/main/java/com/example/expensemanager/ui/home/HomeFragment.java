@@ -52,6 +52,10 @@ public class HomeFragment extends Fragment {
         AnyChartView anyChartView = view.findViewById(R.id.anychartview);
         Pie pie = AnyChart.pie();
 
+        DrawGraph(anyChartView, pie);
+    }
+
+    private void DrawGraph(AnyChartView view, Pie pie) {
         List<DataEntry> chartData = new ArrayList<>();
         ExpenseRepository.getAllExpenses();
         Collection<Category> categories = CategoryRepository.getAllCategories();
@@ -61,7 +65,7 @@ public class HomeFragment extends Fragment {
         }
 
         pie.data(chartData);
-        anyChartView.setChart(pie);
+        view.setChart(pie);
     }
 
     private double getCategoryValue(Category category) {
