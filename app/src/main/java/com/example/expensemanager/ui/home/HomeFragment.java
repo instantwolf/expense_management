@@ -51,11 +51,9 @@ public class HomeFragment extends Fragment {
         List<DataEntry> chartData = new ArrayList<>();
 
         AnyChartView anyChartView = view.findViewById(R.id.anychartview);
-
-        homeGraph = new HomeGraph(anyChartView, chartData);
-
+        Pie pie = AnyChart.pie();
+        homeGraph = new HomeGraph(anyChartView, chartData, pie);
         homeGraph.drawGraph();
-        homeGraph.clearData();
     }
     private void initSpinners() {
         if (getContext() == null) return;

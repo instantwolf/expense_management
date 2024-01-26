@@ -1,7 +1,5 @@
 package com.example.expensemanager.ui.home;
 
-import android.provider.ContactsContract;
-
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
@@ -19,9 +17,12 @@ public class HomeGraph {
     private AnyChartView anychartView;
     private List<DataEntry> chartData;
 
-    public HomeGraph(AnyChartView view, List<DataEntry> data) {
-        anychartView = view;
-        chartData = data;
+    private Pie pie;
+
+    public HomeGraph(AnyChartView view, List<DataEntry> data, Pie pie) {
+        this.anychartView = view;
+        this.chartData = data;
+        this.pie = pie;
     }
 
     public void drawGraph() {
@@ -30,12 +31,11 @@ public class HomeGraph {
         Collection<Category> categories = CategoryRepository.getAllCategories();
         for (Category category: categories) {
             double categoryValue = getCategoryValue(category);
+            System.out.println("Testing: " + categoryValue);
             chartData.add(new ValueDataEntry(category.getName(), categoryValue));
         }
 
-        Pie pie = AnyChart.pie();
-
-        // update and redraw the chart
+                // update and redraw the chart
         pie.data(chartData);
         anychartView.setChart(pie);
         anychartView.invalidate();
