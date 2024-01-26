@@ -18,21 +18,21 @@ public class ExpenseRepository {
 
     private static volatile ExpenseRepository instance;
 
-    private ExpenseDataSource dataSource;
+    private ExpenseDataSource dataSource = new ExpenseDataSource();
 
     // If expenses credentials will be cached in local storage, it is recommended it be encrypted
     // @see https://developer.android.com/training/articles/keystore
     private ArrayList<Expense> expenses;
 
     // private constructor : singleton access
-    private ExpenseRepository(ExpenseDataSource dataSource) {
-        this.dataSource = dataSource;
+    private ExpenseRepository() {
         this.expenses = new ArrayList<>();
     }
 
-    public static ExpenseRepository getInstance(ExpenseDataSource dataSource) {
+    public static ExpenseRepository getInstance() {
         if (instance == null) {
-            instance = new ExpenseRepository(dataSource);
+            instance = new ExpenseRepository();
+            instance.dataSource.seedData();
         }
         return instance;
     }
@@ -40,9 +40,9 @@ public class ExpenseRepository {
     public static boolean removeExpenseById(int id){
         boolean found = false;
 
-        Optional<Expense> optionalExpense = instance.expenses.stream().filter(x -> x.getId() == id).findAny();
+        Optional<Expense> optionalExpense = getInstance().expenses.stream().filter(x -> x.getId() == id).findAny();
         if(optionalExpense.isPresent()){
-            instance.expenses.remove(optionalExpense.get());
+            getInstance().expenses.remove(optionalExpense.get());
             found = true;
         }
         return found;
@@ -57,8 +57,16 @@ public class ExpenseRepository {
      */
     public static Expense addExpense(String title, double amount, LocalDate date, Category category){
         Expense created =  new Expense(getNextId(),title,amount,date, category);
-        instance.expenses.add(created);
-       // CategoryRepository.addExpenseToCategory(created);
+        getInstance().expenses.add(created);
+        return created;
+    }
+
+    public static Expense addExpense(String title, double amount, LocalDate date, String category){
+        //create if not exists
+        Category newCategory = CategoryRepository.addCategoryIfNotExists(category);
+
+        Expense created =  new Expense(getNextId(),title,amount,date, newCategory);
+        getInstance().expenses.add(created);
         return created;
     }
 
@@ -68,11 +76,11 @@ public class ExpenseRepository {
     }
 
     public static Optional<Expense> getExpenseById(int id){
-        return instance.expenses.stream().filter(x -> x.getId() == id).findAny();
+        return getInstance().expenses.stream().filter(x -> x.getId() == id).findAny();
     }
 
     public static Collection<Expense> getAllExpenses(){
-        return instance.expenses;
+        return getInstance().expenses;
     }
 
     public static Collection<Expense> getAllExpensesSortedByDateAsc(){
@@ -93,7 +101,7 @@ public class ExpenseRepository {
 
 
     public static Collection<Expense> getExpensesByCategoryId(int id){
-        return instance.expenses.stream()
+        return getInstance().expenses.stream()
                 .filter(x -> x.getCategory().getId() == id)
                 .collect(Collectors.toList());
     }
@@ -106,7 +114,7 @@ public class ExpenseRepository {
 
 
     public static Collection<Expense> getExpensesByDateRange(LocalDate from, LocalDate to){
-        return instance.expenses.stream()
+        return getInstance().expenses.stream()
                 .filter(x ->
                         x.getDate().compareTo(from) >= 0
                                 && x.getDate().compareTo(to) <= 0)
@@ -114,10 +122,14 @@ public class ExpenseRepository {
     }
 
     public static Collection<Expense> getSortedExpenses(Comparator<Expense> comp){
-        List<Expense> listToSort = instance.expenses;
+        List<Expense> listToSort = getInstance().expenses;
         Collections.sort(listToSort, comp);
         return listToSort;
     }
+
+//    public static double getAmountByCategoryId(int categoryId){
+//        return getExpensesByCategoryId(categoryId).stream().mapToDouble(Expense::getAmount).sum();
+//    }
 
     //if the array if empty , 1 is returned, otherwise highest number+1
     private static int getNextId(){
@@ -125,7 +137,7 @@ public class ExpenseRepository {
     }
 
     private static int getHighestNumber(){
-        return instance.expenses.stream().mapToInt(Expense::getId).max()
+        return getInstance().expenses.stream().mapToInt(Expense::getId).max()
                 .orElse(0);
     }
 

@@ -24,6 +24,7 @@ import com.example.expensemanager.data.category.CategoryRepository;
 import com.example.expensemanager.data.category.model.Category;
 import com.example.expensemanager.data.expenses.ExpenseRepository;
 import com.example.expensemanager.data.expenses.model.Expense;
+
 import com.example.expensemanager.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
@@ -52,19 +53,13 @@ public class HomeFragment extends Fragment {
         Pie pie = AnyChart.pie();
 
         List<DataEntry> chartData = new ArrayList<>();
+        ExpenseRepository.getAllExpenses();
         Collection<Category> categories = CategoryRepository.getAllCategories();
         for (Category category: categories) {
             double categoryValue = getCategoryValue(category);
             System.out.println("Testing Values: " + category.getName());
             chartData.add(new ValueDataEntry(category.getName(), categoryValue));
         }
-
-//        Collection<Expense> expenses = ExpenseRepository.getAllExpenses();
-//        for (Expense expense: expenses) {
-//            System.out.println("Expense Values: " + expense.getAmount());
-//        }
-
-        //      ^  GET NED!   ^
 
         pie.data(chartData);
         anyChartView.setChart(pie);

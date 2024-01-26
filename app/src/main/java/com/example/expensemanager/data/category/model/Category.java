@@ -23,10 +23,6 @@ public class Category {
 
     public String getName() { return this.name; }
 
-//    public int getExpenseCount() {
-//        return this.expenses.size();
-//    }
-  
     public boolean matches(String name){
         return getEqualityString(this.name).equals(getEqualityString(name));
     }

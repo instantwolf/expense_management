@@ -16,22 +16,13 @@ import java.util.ArrayList;
 public class ExpenseDataSource {
 
 
-    public ArrayList<Expense> getData() {
-        //provide Default Data here
-        ArrayList<Expense> demoData = new ArrayList<>();
-        seedData(demoData);
-        return demoData;
-    }
+    public void seedData(){
 
-    private void seedData(ArrayList<Expense> demo){
-
-        //add housing expenses
         int idCounter = 1;
 
         for (int i = 1; i <= 12; i++) {
-            demo.add(new Expense(idCounter++,"Miete",450.00, LocalDate.of(2023,i,1), CategoryRepository.getCategoryById(1).get()));
+            ExpenseRepository.addExpense("Miete", 450.00,  LocalDate.of(2023,i,1),"housing");
         }
-        demo.add(new Expense(idCounter++, "Miete", 450.00, LocalDate.of(2024,01,01),CategoryRepository.getCategoryById(1).get()));
-
+        ExpenseRepository.addExpense("Miete", 450.00,  LocalDate.of(2024,01,01),"housing");
     }
 }
