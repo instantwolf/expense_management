@@ -42,8 +42,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initSpinners();
-        observeCategorySelection();
+        /*initSpinners();*/
+        /*observeCategorySelection();*/
 
         List<DataEntry> chartData = new ArrayList<>();
 
@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
         HomeGraph.setData();
     }
 
-    private void initSpinners() {
+/*    private void initSpinners() {
         if (getContext() == null) return;
 
         List<String> timeIntervalData = homeViewModel.getTimeIntervalData();
@@ -79,13 +79,13 @@ public class HomeFragment extends Fragment {
         expenseCategorySpinner.setAdapter(expenseCategoryAdapter);
 
         ReadCategorySpinner();
-    }
+    }*/
 
-    private void observeCategorySelection(){
+/*    private void observeCategorySelection(){
         homeViewModel.getSelectedCategory().observe(getViewLifecycleOwner(), this::updateCategoryViews);
-    }
+    }*/
 
-    private void ReadCategorySpinner() {
+/*    private void ReadCategorySpinner() {
         Spinner categoriesSpinner = binding.expenseCategory;
         categoriesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -103,9 +103,9 @@ public class HomeFragment extends Fragment {
 
             }
         });
-    }
+    }*/
 
-    private void updateCategoryViews(String category) {
+/*    private void updateCategoryViews(String category) {
         switch (category) {
             case "All":
                 // Show all categories
@@ -163,7 +163,7 @@ public class HomeFragment extends Fragment {
                 binding.groupCategory2.setVisibility(View.GONE);
                 binding.groupCategory3.setVisibility(View.GONE);
                 break;
-        }
+        }*/
 
         //        if (category.equals("All")) {
 //            binding.cat1.setText("Food");
@@ -175,8 +175,8 @@ public class HomeFragment extends Fragment {
 //            binding.cat1.setText(category);
 //            binding.cat2.setVisibility(View.GONE);
 //            binding.cat3.setVisibility(View.GONE);
-//        }
-    }
+/*//        }
+    }*/
     @Override
     public void onDestroyView() {
         super.onDestroyView();

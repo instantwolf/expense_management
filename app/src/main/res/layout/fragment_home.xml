@@ -7,199 +7,64 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.home.HomeFragment">
-
-        <Spinner
-            android:id="@+id/time_interval"
-            android:layout_width="160dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="24dp"
-            android:spinnerMode="dropdown"
-            app:layout_constraintEnd_toStartOf="@+id/expense_category"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Spinner
-            android:id="@+id/expense_category"
-            android:layout_width="160dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="24dp"
-            android:spinnerMode="dropdown"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/time_interval"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/remain_budget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="33dp"
             android:text="Remaining Budget:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/time_interval" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/budget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="33dp"
             android:text="100€"
             app:layout_constraintStart_toEndOf="@+id/remain_budget"
-            app:layout_constraintTop_toBottomOf="@+id/time_interval" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="24dp"
-            android:text="Expense by Category:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/remain_budget" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
             android:id="@+id/expense"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="347dp"
             android:layout_height="12dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="80dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-        <TextView
-            android:id="@+id/cat_1"
-            android:layout_width="135dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="24dp"
-            android:text="Category 1:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/expense" />
-
-        <TextView
-            android:id="@+id/cat_2"
-            android:layout_width="135dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="16dp"
-            android:text="Category 2:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cat_1" />
-
-        <TextView
-            android:id="@+id/cat_3"
-            android:layout_width="135dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="16dp"
-            android:text="Category 3:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cat_2" />
-
-        <TextView
-            android:id="@+id/money_1"
-            android:layout_width="136dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="24dp"
-            android:text="261,52€"
-            app:layout_constraintStart_toEndOf="@+id/cat_1"
-            app:layout_constraintTop_toBottomOf="@+id/expense" />
-
-        <TextView
-            android:id="@+id/money_2"
-            android:layout_width="136dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="1dp"
-            android:text="123,45€"
-            app:layout_constraintEnd_toStartOf="@+id/percent_2"
-            app:layout_constraintStart_toEndOf="@+id/cat_2"
-            app:layout_constraintTop_toBottomOf="@+id/money_1" />
-
-        <TextView
-            android:id="@+id/money_3"
-            android:layout_width="136dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="1dp"
-            android:text="42,69€"
-            app:layout_constraintEnd_toStartOf="@+id/percent_3"
-            app:layout_constraintStart_toEndOf="@+id/cat_3"
-            app:layout_constraintTop_toBottomOf="@+id/money_2" />
-
-        <TextView
-            android:id="@+id/percent_3"
-            android:layout_width="136dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="1dp"
-            android:text="9.98%"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/percent_2" />
-
-        <TextView
-            android:id="@+id/percent_1"
-            android:layout_width="136dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="24dp"
-            android:text="61.15%"
-            app:layout_constraintStart_toEndOf="@+id/money_1"
-            app:layout_constraintTop_toBottomOf="@+id/expense" />
-
-        <TextView
-            android:id="@+id/percent_2"
-            android:layout_width="136dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="1dp"
-            android:text="28.87%"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/money_2"
-            app:layout_constraintTop_toBottomOf="@+id/percent_1" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/group_category_1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_ids="cat_1,money_1,percent_1" />
+            android:layout_height="wrap_content" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/group_category_2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_ids="cat_2,money_2,percent_2" />
+            android:layout_height="wrap_content" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/group_category_3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_ids="cat_3,money_3,percent_3" />
+            android:layout_height="wrap_content" />
 
         <com.anychart.AnyChartView
             android:id="@+id/anychartview"
             android:layout_width="299dp"
             android:layout_height="377dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="129dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/money_3" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
