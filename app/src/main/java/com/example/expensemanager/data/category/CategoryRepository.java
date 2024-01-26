@@ -23,7 +23,7 @@ public class CategoryRepository {
     private CategoryRepository() {
         this.categories = new ArrayList<>();
         this.categories.add(DEFAULT_CATEGORY);
-       this.categories.addAll(dataSource.getData());
+      // this.categories.addAll(dataSource.getData());
     }
 
     public static CategoryRepository getInstance() {
@@ -62,7 +62,7 @@ public class CategoryRepository {
     }
 
     public static Optional<Category> getCategoryByName(String name){
-      Optional<Category> optionalCategory = instance.categories.stream()
+      Optional<Category> optionalCategory = getInstance().categories.stream()
               .filter(x -> x.matches(name)).findAny();
       return optionalCategory;
     }
@@ -95,11 +95,11 @@ public class CategoryRepository {
     }
 
     public static Collection<String> getDisplayableCategoryNames(){
-        return instance.categories.stream().filter(x -> !x.equals(getDefaultCategory())).map(Category::getName).collect(Collectors.toList());
+        return getInstance().categories.stream().filter(x -> !x.equals(getDefaultCategory())).map(Category::getName).collect(Collectors.toList());
     }
 
     public static Collection<String> getCategoryNames(){
-        return instance.categories.stream().map(Category::getName).collect(Collectors.toList());
+        return getInstance().categories.stream().map(Category::getName).collect(Collectors.toList());
     }
 
 

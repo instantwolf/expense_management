@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.expensemanager.R;
 import com.example.expensemanager.data.category.CategoryRepository;
 import com.example.expensemanager.data.category.model.Category;
+import com.example.expensemanager.data.expenses.ExpenseRepository;
 import com.example.expensemanager.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
@@ -50,9 +51,10 @@ public class HomeFragment extends Fragment {
         Pie pie = AnyChart.pie();
 
         List<DataEntry> chartData = new ArrayList<>();
+        ExpenseRepository.getAllExpenses();
         Collection<Category> categories = CategoryRepository.getAllCategories();
         for (Category category: categories) {
-            int categoryValue = getCategoryValue(category);
+            double categoryValue = getCategoryValue(category);
             System.out.println("Testing Values: " + category.getName() );
             chartData.add(new ValueDataEntry(category.getName(), categoryValue));
         }
@@ -61,8 +63,8 @@ public class HomeFragment extends Fragment {
         anyChartView.setChart(pie);
     }
 
-    private int getCategoryValue(Category category) {
-        return 50;
+    private double getCategoryValue(Category category) {
+        return ExpenseRepository.getAmountByCategoryId(category.getId());
     }
 
     private void initSpinners() {
