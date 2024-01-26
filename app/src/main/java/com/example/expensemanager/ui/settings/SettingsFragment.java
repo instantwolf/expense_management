@@ -38,9 +38,9 @@ public class SettingsFragment extends Fragment {
 
         EditText editTextMonthlyAmount = binding.settingsMonthlyAmount;
         EditText editTextYearlyAmount = binding.settingsYearlyAmount;
-        EditText editTextNumberDecimal = binding.editTextNumberDecimal;
+        /*EditText editTextNumberDecimal = binding.editTextNumberDecimal;
         EditText editTextNumberDecimal2 = binding.editTextNumberDecimal2;
-        EditText editTextNumberDecimal3 = binding.editTextNumberDecimal3;
+        EditText editTextNumberDecimal3 = binding.editTextNumberDecimal3;*/
 
 
         Spinner currencySpinner = binding.Spinner; // Stellen Sie sicher, dass dies die korrekte ID Ihres Spinners ist
@@ -108,9 +108,9 @@ public class SettingsFragment extends Fragment {
 
         editTextMonthlyAmount.addTextChangedListener(euroTextWatcher);
         editTextYearlyAmount.addTextChangedListener(euroTextWatcher);
-        editTextNumberDecimal.addTextChangedListener(euroTextWatcher);
+        /*editTextNumberDecimal.addTextChangedListener(euroTextWatcher);
         editTextNumberDecimal2.addTextChangedListener(euroTextWatcher);
-        editTextNumberDecimal3.addTextChangedListener(euroTextWatcher);
+        editTextNumberDecimal3.addTextChangedListener(euroTextWatcher);*/
 
         return root;
     }
@@ -140,9 +140,9 @@ public class SettingsFragment extends Fragment {
         // Aktualisieren Sie den Platzhaltertext der EditText-Elemente
         binding.settingsMonthlyAmount.setHint("0000.00" + currencySymbol);
         binding.settingsYearlyAmount.setHint("0000.00" + currencySymbol);
-        binding.editTextNumberDecimal.setHint("000.00" + currencySymbol);
+        /*binding.editTextNumberDecimal.setHint("000.00" + currencySymbol);
         binding.editTextNumberDecimal2.setHint("000.00" + currencySymbol);
-        binding.editTextNumberDecimal3.setHint("000.00" + currencySymbol);
+        binding.editTextNumberDecimal3.setHint("000.00" + currencySymbol);*/
 
     }
 

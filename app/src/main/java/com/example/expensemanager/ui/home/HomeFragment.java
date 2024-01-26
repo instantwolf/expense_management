@@ -46,10 +46,23 @@ public class HomeFragment extends Fragment {
         initSpinners();
         observeCategorySelection();
 
+        AnyChartView anyChartView = view.findViewById(R.id.anychartview);
+        Pie pie = AnyChart.pie();
+
+        List<DataEntry> chartData = new ArrayList<>();
         Collection<Category> categories = CategoryRepository.getAllCategories();
         for (Category category: categories) {
-            System.out.println(category.getName());
+            int categoryValue = getCategoryValue(category);
+            System.out.println("Testing Values: " + category.getName() );
+            chartData.add(new ValueDataEntry(category.getName(), categoryValue));
         }
+
+        pie.data(chartData);
+        anyChartView.setChart(pie);
+    }
+
+    private int getCategoryValue(Category category) {
+        return 50;
     }
 
     private void initSpinners() {
