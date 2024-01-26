@@ -106,6 +106,13 @@ public class ExpenseRepository {
                 .collect(Collectors.toList());
     }
 
+
+    public static double getAmountByCategoryId(int id ){
+        return getExpensesByCategoryId(id).stream().map(Expense::getAmount).mapToDouble(Double::doubleValue).sum();
+    }
+
+
+
     public static Collection<Expense> getExpensesByDateRange(LocalDate from, LocalDate to){
         return getInstance().expenses.stream()
                 .filter(x ->
@@ -120,9 +127,9 @@ public class ExpenseRepository {
         return listToSort;
     }
 
-    public static double getAmountByCategoryId(int categoryId){
-        return getExpensesByCategoryId(categoryId).stream().mapToDouble(Expense::getAmount).sum();
-    }
+//    public static double getAmountByCategoryId(int categoryId){
+//        return getExpensesByCategoryId(categoryId).stream().mapToDouble(Expense::getAmount).sum();
+//    }
 
     //if the array if empty , 1 is returned, otherwise highest number+1
     private static int getNextId(){

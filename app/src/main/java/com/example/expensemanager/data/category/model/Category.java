@@ -23,7 +23,6 @@ public class Category {
 
     public String getName() { return this.name; }
 
-  
     public boolean matches(String name){
         return getEqualityString(this.name).equals(getEqualityString(name));
     }

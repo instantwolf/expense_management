@@ -1,7 +1,6 @@
 package com.example.expensemanager.ui.home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.Spinner;
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Pie;
 
 import androidx.annotation.NonNull;
@@ -21,8 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.expensemanager.R;
 import com.example.expensemanager.data.category.CategoryRepository;
-import com.example.expensemanager.data.category.model.Category;
-import com.example.expensemanager.data.expenses.ExpenseRepository;
+
 import com.example.expensemanager.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
@@ -33,6 +30,7 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     private HomeViewModel homeViewModel;
+    private HomeGraph homeGraph;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -47,32 +45,27 @@ public class HomeFragment extends Fragment {
         initSpinners();
         observeCategorySelection();
 
+        List<DataEntry> chartData = new ArrayList<>();
+
         AnyChartView anyChartView = view.findViewById(R.id.anychartview);
         Pie pie = AnyChart.pie();
-
-        List<DataEntry> chartData = new ArrayList<>();
-        ExpenseRepository.getAllExpenses();
-        Collection<Category> categories = CategoryRepository.getAllCategories();
-        for (Category category: categories) {
-            double categoryValue = getCategoryValue(category);
-            System.out.println("Testing Values: " + category.getName() );
-            chartData.add(new ValueDataEntry(category.getName(), categoryValue));
-        }
-
-        pie.data(chartData);
-        anyChartView.setChart(pie);
+        homeGraph = new HomeGraph(anyChartView, chartData, pie);
+        homeGraph.drawGraph();
     }
 
-    private double getCategoryValue(Category category) {
-        return ExpenseRepository.getAmountByCategoryId(category.getId());
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        HomeGraph.setData();
     }
 
     private void initSpinners() {
         if (getContext() == null) return;
 
         List<String> timeIntervalData = homeViewModel.getTimeIntervalData();
-        List<String> expenseCategoryData = homeViewModel.getExpenseCategoryData();
-
+        Collection<String> expenseCategoryDataCollection = CategoryRepository.getCategoryNames();
+        List<String> expenseCategoryData = new ArrayList<>(expenseCategoryDataCollection);
         Spinner timeIntervalSpinner = binding.timeInterval;
         Spinner expenseCategorySpinner = binding.expenseCategory;
 
