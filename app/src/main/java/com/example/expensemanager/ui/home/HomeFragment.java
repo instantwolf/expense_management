@@ -57,7 +57,6 @@ public class HomeFragment extends Fragment {
         Collection<Category> categories = CategoryRepository.getAllCategories();
         for (Category category: categories) {
             double categoryValue = getCategoryValue(category);
-            System.out.println("Testing Values: " + category.getName());
             chartData.add(new ValueDataEntry(category.getName(), categoryValue));
         }
 
