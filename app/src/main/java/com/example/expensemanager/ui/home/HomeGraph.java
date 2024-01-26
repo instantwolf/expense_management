@@ -1,6 +1,5 @@
 package com.example.expensemanager.ui.home;
 
-import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
@@ -15,9 +14,9 @@ import java.util.List;
 public class HomeGraph {
 
     private AnyChartView anychartView;
-    private List<DataEntry> chartData;
+    private static List<DataEntry> chartData;
 
-    private Pie pie;
+    private static Pie pie;
 
     public HomeGraph(AnyChartView view, List<DataEntry> data, Pie pie) {
         this.anychartView = view;
@@ -41,8 +40,8 @@ public class HomeGraph {
         anychartView.invalidate();
     }
 
-    public void clearData() {
-        chartData.clear();
+    public static void setData() {
+        pie.data(chartData);
     }
 
     private static double getCategoryValue(Category category) {

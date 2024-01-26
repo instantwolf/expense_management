@@ -10,7 +10,6 @@ import android.widget.Spinner;
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Pie;
 
 import androidx.annotation.NonNull;
@@ -20,8 +19,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.expensemanager.R;
 import com.example.expensemanager.data.category.CategoryRepository;
-import com.example.expensemanager.data.category.model.Category;
-import com.example.expensemanager.data.expenses.ExpenseRepository;
 
 import com.example.expensemanager.databinding.FragmentHomeBinding;
 
@@ -55,6 +52,14 @@ public class HomeFragment extends Fragment {
         homeGraph = new HomeGraph(anyChartView, chartData, pie);
         homeGraph.drawGraph();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        HomeGraph.setData();
+    }
+
     private void initSpinners() {
         if (getContext() == null) return;
 
