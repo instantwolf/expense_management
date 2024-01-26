@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
         List<DataEntry> chartData = new ArrayList<>();
         Collection<Category> categories = CategoryRepository.getAllCategories();
         for (Category category: categories) {
-            int categoryValue = getCategoryValue(category);
+            double categoryValue = getCategoryValue(category);
             System.out.println("Testing Values: " + category.getName());
             chartData.add(new ValueDataEntry(category.getName(), categoryValue));
         }
@@ -70,8 +70,8 @@ public class HomeFragment extends Fragment {
         anyChartView.setChart(pie);
     }
 
-    private int getCategoryValue(Category category) {
-        return 50;
+    private double getCategoryValue(Category category) {
+        return ExpenseRepository.getAmountByCategoryId(category.getId());
     }
 
     private void initSpinners() {

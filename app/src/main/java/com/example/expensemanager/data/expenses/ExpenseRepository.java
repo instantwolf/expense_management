@@ -98,6 +98,13 @@ public class ExpenseRepository {
                 .collect(Collectors.toList());
     }
 
+
+    public static double getAmountByCategoryId(int id ){
+        return getExpensesByCategoryId(id).stream().map(Expense::getAmount).mapToDouble(Double::doubleValue).sum();
+    }
+
+
+
     public static Collection<Expense> getExpensesByDateRange(LocalDate from, LocalDate to){
         return instance.expenses.stream()
                 .filter(x ->
